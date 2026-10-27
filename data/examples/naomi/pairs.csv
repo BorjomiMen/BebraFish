@@ -1,0 +1,7 @@
+name,image,mask,group
+naomi_0000_seed20263000.tif,images/naomi_0000_seed20263000.tif,masks/naomi_0000_seed20263000.png,20263000
+naomi_0001_seed20263001.tif,images/naomi_0001_seed20263001.tif,masks/naomi_0001_seed20263001.png,20263001
+naomi_0002_seed20263002.tif,images/naomi_0002_seed20263002.tif,masks/naomi_0002_seed20263002.png,20263002
+naomi_0003_seed20263003.tif,images/naomi_0003_seed20263003.tif,masks/naomi_0003_seed20263003.png,20263003
+naomi_0004_seed20263004.tif,images/naomi_0004_seed20263004.tif,masks/naomi_0004_seed20263004.png,20263004
+naomi_0005_seed20263005.tif,images/naomi_0005_seed20263005.tif,masks/naomi_0005_seed20263005.png,20263005

@@ -1,0 +1,12 @@
+{
+  "dataset": "data/prepared_images",
+  "steps": 20000,
+  "channels": 48,
+  "batch_size": 1,
+  "accumulation": 4,
+  "lr": 0.0002,
+  "timesteps": 1000,
+  "save_every": 500,
+  "preview_every": 1000,
+  "device": "cuda"
+}

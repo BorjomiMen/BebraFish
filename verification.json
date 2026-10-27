@@ -1,0 +1,18 @@
+{
+  "python_syntax": "passed",
+  "notebook_schema": "nbformat.validate passed",
+  "notebook_cell_syntax": "passed",
+  "unet_architecture_unchanged": true,
+  "model_training_executed": false,
+  "model_inference_executed": false,
+  "notebook_executed": false,
+  "included_diffusion_step": 3000,
+  "user_diffusion_target": "weights/diffusion/step_007500.pt",
+  "data_adapter_tests": "3 passed",
+  "cli_help": "passed",
+  "checkpoint_formats": "unetpp v1 / static vdiffusion v1",
+  "included_weights": [
+    "weights/unetpp/best.pt",
+    "weights/diffusion/step_003000.pt"
+  ]
+}

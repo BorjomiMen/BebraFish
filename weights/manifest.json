@@ -1,0 +1,21 @@
+{
+  "checkpoints": [
+    {
+      "kind": "unetpp",
+      "path": "weights/unetpp/best.pt",
+      "bytes": 110139497,
+      "sha256": "bf8b7b47e61644672bd60d7627358631b62b676f3ca1cd9df13eb084e6ae374a",
+      "format": "naomi-unetpp-fullframe-v1",
+      "epoch": 145
+    },
+    {
+      "kind": "diffusion",
+      "path": "weights/diffusion/step_003000.pt",
+      "bytes": 135625629,
+      "sha256": "c2c8bfc9150d9a30525925270d8606d5e9dace990cef6e0edee9462c576a1842",
+      "format": "neural-naomi-static-vdiffusion-v1",
+      "step": 3000
+    }
+  ],
+  "user_checkpoint": "diffusion/step_007500.pt"
+}

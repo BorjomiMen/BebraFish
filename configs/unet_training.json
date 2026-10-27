@@ -1,0 +1,10 @@
+{
+  "data": "data/prepared_masks",
+  "epochs": 150,
+  "base_channels": 32,
+  "batch_size": 1,
+  "accumulation": 4,
+  "lr": 0.0003,
+  "patience": 25,
+  "device": "cuda"
+}

@@ -1,0 +1,8 @@
+{
+  "diffusion_checkpoint": "weights/diffusion/step_003000.pt",
+  "unet_checkpoint": "weights/unetpp/best.pt",
+  "seed": 20331027,
+  "sample_steps": 100,
+  "device": "auto",
+  "output": "outputs/generated"
+}

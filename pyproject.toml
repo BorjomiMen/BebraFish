@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diffusion-zebrafish"
+version = "0.1.0"
+description = "Static fluorescence image generation and U-Net++ segmentation"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.3", "numpy>=1.24", "Pillow>=9", "tifffile"]
+
+[project.scripts]
+zebrafish-diffusion = "zebrafish_diffusion.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
