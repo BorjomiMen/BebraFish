@@ -73,13 +73,12 @@ SAMPLE_STEPS = 100
 COUNT = 1
 INPUT_IMAGE = ''           # одиночный PNG/TIFF для RUN_SEGMENTATION
 
+from zebrafish_diffusion.checkpoints import latest_diffusion
 UNET_WEIGHTS = ROOT / 'weights/unetpp/best.pt'
-DIFFUSION_WEIGHTS = ROOT / 'weights/diffusion/step_007500.pt'
-if not DIFFUSION_WEIGHTS.is_file():
-    DIFFUSION_WEIGHTS = ROOT / 'weights/diffusion/step_003000.pt'
+DIFFUSION_WEIGHTS = latest_diffusion(ROOT / 'weights/diffusion')
 
 IMPORT_DRIVE_WEIGHTS = IN_COLAB and (RUN_GENERATION or RUN_SEGMENTATION) and (
-    not UNET_WEIGHTS.is_file() or (RUN_GENERATION and not DIFFUSION_WEIGHTS.is_file()))
+    not UNET_WEIGHTS.is_file() or (RUN_GENERATION and DIFFUSION_WEIGHTS is None))
 DRIVE_UNET = '/content/drive/MyDrive/best.pt'
 DRIVE_DIFFUSION = ''       # точный last.pt; пусто = последний neural_naomi_runs/run_*/last.pt
 
@@ -202,5 +201,10 @@ notebook=dict(nbformat=4,nbformat_minor=5,metadata={
     'language_info':{'name':'python'},'colab':{'name':'Zebrafish_Framework.ipynb'}},cells=cells)
 target=ROOT/'notebooks/Zebrafish_Framework.ipynb'
 target.parent.mkdir(parents=True,exist_ok=True)
+if target.is_file():
+    previous=json.loads(target.read_text(encoding='utf-8'))
+    for old,new in zip(previous.get('cells',[]),cells):
+        if old['cell_type']==new['cell_type'] and old.get('id'):
+            new['id']=old['id']
 target.write_text(json.dumps(notebook,ensure_ascii=False,indent=1),encoding='utf-8')
 print(target)

@@ -30,8 +30,7 @@ diffusion zebrafish/
   weights/
     manifest.json                 происхождение и SHA-256 включённых весов
     unetpp/best.pt                 готовый сегментатор
-    diffusion/step_003000.pt       готовая диффузия, шаг 3000
-    diffusion/step_007500.pt       место для checkpoint пользователя
+    diffusion/step_007500.pt       готовая диффузия, шаг 7500
   data/examples/                  примеры пар NAOMi для просмотра формата
   outputs/                        результаты запусков
   tools/
@@ -41,8 +40,8 @@ diffusion zebrafish/
   dist/                           собранные архивы
 ```
 
-`step_007500.pt` добавляется пользователем. В основной ноутбук встроен выбор:
-сначала `weights/diffusion/step_007500.pt`, затем `step_003000.pt`.
+В ноутбуке и CLI по умолчанию выбирается файл `step_*.pt` с наибольшим номером
+из `weights/diffusion`. В текущем локальном комплекте это `step_007500.pt`.
 Имена файлов не меняют сохранённый шаг: он читается из поля `step` внутри checkpoint.
 
 ## 2. Установка
@@ -87,16 +86,15 @@ python -m pip install -e .
 | Модель | Файл | Формат checkpoint |
 |---|---|---|
 | U-Net++ | `weights/unetpp/best.pt` | `naomi-unetpp-fullframe-v1` |
-| Диффузия, 3000 шагов | `weights/diffusion/step_003000.pt` | `neural-naomi-static-vdiffusion-v1` |
-| Диффузия, 7500 шагов | `weights/diffusion/step_007500.pt`, добавить самостоятельно | тот же формат |
+| Диффузия, 7500 шагов | `weights/diffusion/step_007500.pt` | `neural-naomi-static-vdiffusion-v1` |
 
 Генерация одного изображения и маски на CPU:
 
 ```bash
-python pipeline.py generate --diffusion weights/diffusion/step_003000.pt --unet weights/unetpp/best.pt --seed 20331027 --steps 100 --device cpu --output outputs/demo
+python pipeline.py generate --unet weights/unetpp/best.pt --seed 20331027 --steps 100 --device cpu --output outputs/demo
 ```
 
-После добавления весов на 7500:
+С явным выбором checkpoint:
 
 ```bash
 python pipeline.py generate --diffusion weights/diffusion/step_007500.pt --unet weights/unetpp/best.pt --seed 20331027 --steps 100 --device auto --output outputs/demo7500
@@ -113,7 +111,8 @@ python pipeline.py generate --count 10 --seed 42 --steps 100 --device auto
 ```
 
 Seed последовательно принимает значения 42, 43, ..., 51. По умолчанию эта команда
-использует включённый checkpoint 3000. Для другого checkpoint указать `--diffusion`.
+выбирает checkpoint с наибольшим номером в `weights/diffusion`. Для явного выбора
+указать `--diffusion`.
 
 С JSON-конфигурацией:
 
@@ -121,8 +120,8 @@ Seed последовательно принимает значения 42, 43, 
 python pipeline.py generate --config configs/generation.json --seed 123 --device cpu
 ```
 
-Аргументы командной строки переопределяют значения JSON. В конфигурации можно
-заменить `diffusion_checkpoint` на `weights/diffusion/step_007500.pt`.
+Аргументы командной строки переопределяют значения JSON. Значение `diffusion_checkpoint: null`
+включает автоматический выбор; вместо null можно указать конкретный путь.
 
 ### Сегментация существующего изображения
 
@@ -551,7 +550,7 @@ python pipeline.py --help
 
 | Сообщение | Действие |
 |---|---|
-| checkpoint not found | проверить путь к файлу; добавить `step_007500.pt` или выбрать 3000 |
+| checkpoint not found | проверить путь к файлу; добавить checkpoint в weights/diffusion или указать --diffusion |
 | incompatible format | выбрать checkpoint соответствующей модели из таблицы раздела 3 |
 | CUDA unavailable | выбрать `--device cpu` либо GPU-среду |
 | Need at least 5 independent groups | дополнить набор или задать корректные группы |

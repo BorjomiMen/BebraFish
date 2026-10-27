@@ -6,13 +6,15 @@
   "model_training_executed": false,
   "model_inference_executed": false,
   "notebook_executed": false,
-  "included_diffusion_step": 3000,
-  "user_diffusion_target": "weights/diffusion/step_007500.pt",
+  "included_diffusion_step": 7500,
   "data_adapter_tests": "3 passed",
   "cli_help": "passed",
   "checkpoint_formats": "unetpp v1 / static vdiffusion v1",
   "included_weights": [
     "weights/unetpp/best.pt",
-    "weights/diffusion/step_003000.pt"
-  ]
+    "weights/diffusion/step_007500.pt"
+  ],
+  "checkpoint_selection_tests": "2 passed",
+  "algorithm_equivalence": "network files byte-identical; U-Net loss/normalization/training and diffusion/DDIM loops AST-identical",
+  "checkpoint_selection": "highest step_*.pt; actual current checkpoint has step=7500"
 }

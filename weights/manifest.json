@@ -10,12 +10,11 @@
     },
     {
       "kind": "diffusion",
-      "path": "weights/diffusion/step_003000.pt",
+      "path": "weights/diffusion/step_007500.pt",
       "bytes": 135625629,
-      "sha256": "c2c8bfc9150d9a30525925270d8606d5e9dace990cef6e0edee9462c576a1842",
+      "sha256": "0f39a23e09738ad30a17c511831c259e1d3bfa6b6a87771344418b38e72bded6",
       "format": "neural-naomi-static-vdiffusion-v1",
-      "step": 3000
+      "step": 7500
     }
-  ],
-  "user_checkpoint": "diffusion/step_007500.pt"
+  ]
 }

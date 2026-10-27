@@ -22,7 +22,7 @@ def main(argv=None):
             p.add_argument('--seed', type=int, default=42)
             p.add_argument('--gap', type=int, default=32)
     p = sub.add_parser('generate')
-    p.add_argument('--diffusion', default='weights/diffusion/step_003000.pt')
+    p.add_argument('--diffusion', default=None, help='Default: highest step_*.pt in weights/diffusion')
     p.add_argument('--unet', default='weights/unetpp/best.pt')
     p.add_argument('--seed', type=int, default=20331027)
     p.add_argument('--steps', type=int, default=100)
@@ -84,8 +84,13 @@ def main(argv=None):
         prepare_segmentation(args.source,args.output,args.image_key,args.mask_key)
     elif args.command == 'generate':
         from .api import Pipeline
+        from .checkpoints import latest_diffusion
         if args.count < 1:
             parser.error('count must be positive')
+        if args.diffusion is None:
+            args.diffusion=latest_diffusion()
+            if args.diffusion is None:
+                parser.error('No weights/diffusion/step_*.pt; provide --diffusion CHECKPOINT')
         pipeline = Pipeline(args.diffusion,args.unet,args.device,not args.no_amp,args.threshold,args.threads)
         for i in range(args.count):
             result = pipeline.generate(args.seed+i,args.steps,tta=args.tta)
