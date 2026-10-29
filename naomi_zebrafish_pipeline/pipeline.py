@@ -311,7 +311,7 @@ def main() -> None:
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--cells", default="auto",
                         help="'auto' scales 12000 Zenodo cells by physical tissue area; or enter an integer")
-    parser.add_argument("--nucleus-radius", type=float, default=2.28)
+    parser.add_argument("--nucleus-radius", type=float, default=1.6)
     args = parser.parse_args()
     args.output = args.output.resolve()
     args.auto_cells = args.cells == "auto"
